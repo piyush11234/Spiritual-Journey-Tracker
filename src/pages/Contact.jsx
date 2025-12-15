@@ -80,7 +80,7 @@ export default function ContactPage() {
             Divine Contact
           </h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Connect with us for blessings, support, or spiritual guidance. We're here with divine love.
+            Reach out to us for support or guidance related to your Satlok Ashram journey. We’re here to assist you.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export default function ContactPage() {
             <div className="bg-linear-to-br from-white to-amber-50/50 dark:from-gray-800/80 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-amber-100 dark:border-gray-700">
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-3">
                 <MdContactPhone className="text-amber-600 dark:text-amber-400" />
-                Sacred Connection
+                Contact Us
               </h2>
               
               <div className="space-y-6">
@@ -100,7 +100,7 @@ export default function ContactPage() {
                     <FaEnvelope className="text-amber-600 dark:text-amber-400 text-xl" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-800 dark:text-white">Blessing Emails</h3>
+                    <h3 className="font-bold text-gray-800 dark:text-white">Emails</h3>
                     <p className="text-gray-600 dark:text-gray-400">piyushshakya7467.com</p>
                   </div>
                 </div>
@@ -150,19 +150,19 @@ export default function ContactPage() {
               <div className="grid grid-cols-2 gap-3 mb-6">
                 <a href="https://www.facebook.com/spiritualleaderSaintRampalJI" className="p-4 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center">
                   <FaFacebook className="text-blue-600 dark:text-blue-400 text-2xl mb-2" />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">Blessings</span>
+                  {/* <span className="text-xs text-gray-700 dark:text-gray-300">Blessings</span> */}
                 </a>
                 <a href="https://www.instagram.com/spiritualleadersaintrampalji/" className="p-4 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center">
                   <FaInstagram className="text-purple-600 dark:text-purple-400 text-2xl mb-2" />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">Meditations</span>
+                  {/* <span className="text-xs text-gray-700 dark:text-gray-300">Meditations</span> */}
                 </a>
                 <a href="https://www.youtube.com/santrampaljimaharajji" className="p-4 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center">
                   <FaYoutube className="text-red-600 dark:text-red-400 text-2xl mb-2" />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">Prayer Group</span>
+                  {/* <span className="text-xs text-gray-700 dark:text-gray-300">Prayer Group</span> */}
                 </a>
                 <a href="https://x.com/SaintRampalJiM" className="p-4 bg-linear-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center">
                   <FaTwitter className="text-cyan-600 dark:text-cyan-400 text-2xl mb-2" />
-                  <span className="text-xs text-gray-700 dark:text-gray-300">Wisdom</span>
+                  {/* <span className="text-xs text-gray-700 dark:text-gray-300">Wisdom</span> */}
                 </a>
                 {/* <a href="#" className="p-4 bg-linear-to-br from-blue-200 to-blue-300 dark:from-blue-800 dark:to-blue-700 rounded-xl hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center">
                   <FaLinkedin className="text-blue-700 dark:text-blue-300 text-2xl mb-2" />
@@ -175,7 +175,7 @@ export default function ContactPage() {
               </div>
               
               <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                Join our divine community for daily blessings
+               Join our Satlok Ashram community for daily updates
               </p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function ContactPage() {
                   <FaPaperPlane className="text-emerald-600 dark:text-emerald-400 text-2xl" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Send Divine Message</h2>
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Send Message</h2>
                   <p className="text-gray-600 dark:text-gray-400">We respond within 24 hours with blessings</p>
                 </div>
               </div>
@@ -198,7 +198,7 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-gray-800 dark:text-white font-medium">
                     <FaUser className="text-amber-600 dark:text-amber-400" />
-                    Your Sacred Name
+                    Your Name
                   </label>
                   <input
                     type="text"
@@ -215,7 +215,7 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-gray-800 dark:text-white font-medium">
                     <FaEnvelope className="text-blue-600 dark:text-blue-400" />
-                    Blessed Email
+                   Your Email
                   </label>
                   <input
                     type="email"
@@ -232,7 +232,7 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-gray-800 dark:text-white font-medium">
                     <FaComment className="text-purple-600 dark:text-purple-400" />
-                    Divine Message
+                    Your Message
                   </label>
                   <textarea
                     name="message"
@@ -332,11 +332,10 @@ export default function ContactPage() {
         <div className="mt-12 text-center">
           <div className="text-4xl mb-4">🪷🙏🕊️</div>
           <p className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            "May your message carry divine energy and receive blessings from the universe. 
-            We await your sacred words with open hearts."
+            We look forward to receiving your message and will respond with care and attention.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-500 mt-4">
-            With love from the Sacred Journey Team
+          🙏🙏🙏 Sat Saheb🙏🙏🙏
           </p>
         </div>
       </div>

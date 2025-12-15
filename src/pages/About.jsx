@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FaHeart, FaUsers, FaGlobe, FaMedal, 
+  FaHeart, FaUsers, FaGlobe, FaMedal,
   FaLightbulb, FaShieldAlt, FaHandsHelping,
   FaLeaf, FaBalanceScale, FaInfinity,
   FaArrowLeft, FaStar, FaPray
@@ -12,7 +12,7 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 pb-12 safe-area transition-colors duration-300">
-      
+
       {/* Divine Background Elements */}
       <div className="absolute inset-0 overflow-hidden opacity-5">
         <div className="absolute top-10 left-10 text-8xl">🙏</div>
@@ -53,11 +53,11 @@ const AboutPage = () => {
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Our Divine Mission</h2>
           </div>
           <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-6">
-            We believe that every spiritual journey is a Spiritual story worth preserving. Our mission is to provide a beautiful, secure space where seekers can document their pilgrimages, temple visits, and divine experiences, creating a lifelong spiritual diary filled with blessings.
+            We believe that every Satlok Ashram journey is a sacred story worth preserving. Our mission is to provide a beautiful and secure space where devotees can document their Satlok Ashram visits, seva, bhandara, and satsang experiences—creating a lifelong spiritual diary.
           </p>
           <div className="p-4 bg-linear-to-r from-amber-50/50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800/30">
             <p className="text-gray-700 dark:text-gray-300 italic">
-              "To serve as a digital sanctuary for spiritual memories, where every visit becomes a cherished chapter in your journey toward enlightenment."
+             “To serve as a digital sanctuary for Satlok Ashram memories, where every visit becomes a cherished chapter in your spiritual journey.”
             </p>
           </div>
         </div>
@@ -69,7 +69,7 @@ const AboutPage = () => {
             Our Divine Values
             <FaStar className="text-amber-500" />
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Value 1 */}
             <div className="bg-linear-to-br from-white to-amber-50/50 dark:from-gray-800/80 dark:to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-blue-100 dark:border-blue-800/30 hover:shadow-2xl hover:scale-105 transition-all duration-300">
@@ -149,28 +149,83 @@ const AboutPage = () => {
           </div>
           <div className="space-y-4 text-gray-700 dark:text-gray-300">
             <p>
-              Spiritual Journey Tracker was born from a personal spiritual need. Our founder, during a pilgrimage to the Himalayas, realized how quickly the details of divine experiences fade from memory.
+              Spiritual Journey Tracker was born from a personal spiritual need. Our founder, during a visit to Satlok Ashram, Shamli, Uttar Pradesh, realized how quickly the details of divine experiences fade from memory.
             </p>
             <p>
-              After losing precious memories of temple visits, family pilgrimages, and spiritual insights, the vision for this platform emerged: a beautiful, secure place where seekers could preserve their Spiritual journeys for generations to come.
+              After realizing how easily memories of Satlok Ashram journeys—our seva, bhandara, and sacred moments—can fade with time, the vision for this platform emerged: a beautiful and secure place to store and preserve Satlok Ashram spiritual journeys for generations to come.
             </p>
             <p>
-              What started as a personal spiritual journal has grown into a platform serving thousands of spiritual seekers worldwide, all united by the desire to honor and remember their divine experiences.
+              What began as our personal way of recording Satlok Ashram experiences has grown into a platform serving thousands of spiritual seekers worldwide, united in preserving memories of seva, bhandara, and their spiritual journeys.
             </p>
           </div>
+
           <div className="mt-6 p-4 bg-linear-to-r from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl">
+            <p className="text-gray-700 dark:text-gray-300 text-center">
+              <span className="font-bold text-purple-600 dark:text-purple-400">10,000+</span> Satlok Ashram spiritual journeys preserved
+              <span className="mx-4">•</span>
+              <span className="font-bold text-purple-600 dark:text-purple-400">10+</span> Satlok Ashram locations covered
+            </p>
+          </div>
+
+          {/* <div className="mt-6 p-4 bg-linear-to-r from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl">
             <p className="text-gray-700 dark:text-gray-300 text-center">
               <span className="font-bold text-purple-600 dark:text-purple-400">10,000+</span> Spiritual journeys documented
               <span className="mx-4">•</span>
               <span className="font-bold text-purple-600 dark:text-purple-400">50+</span> countries served
               <span className="mx-4">•</span>
-              <span className="font-bold text-purple-600 dark:text-purple-400">100+</span> Spiritual places recorded daily
+              <span className="font-bold text-purple-600 dark:text-purple-400">10+</span> Satlok Ashram recorded daily
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Team/Community Section */}
         <div className="bg-linear-to-br from-white to-amber-50/50 dark:from-gray-800/80 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 mb-10 shadow-2xl border border-amber-100 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+            Our Divine Community
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-linear-to-r from-amber-400 to-orange-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">S</span>
+              </div>
+              <h3 className="font-bold text-gray-800 dark:text-white">Sevadar</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Serving Satlok Ashram through seva
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 bg-linear-to-r from-blue-400 to-cyan-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">S</span>
+              </div>
+              <h3 className="font-bold text-gray-800 dark:text-white">Satsang Followers</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Following the path of true knowledge
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 bg-linear-to-r from-green-400 to-emerald-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">D</span>
+              </div>
+              <h3 className="font-bold text-gray-800 dark:text-white">Devotees</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Preserving Satlok Ashram journey memories
+              </p>
+            </div>
+          </div>
+
+          <p className="text-center text-gray-700 dark:text-gray-300">
+            We are blessed to serve a growing community devoted to recording and preserving
+            Satlok Ashram journeys, seva, bhandara, and satsang experiences.
+          </p>
+        </div>
+
+
+
+
+        {/* <div className="bg-linear-to-br from-white to-amber-50/50 dark:from-gray-800/80 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 mb-10 shadow-2xl border border-amber-100 dark:border-gray-700">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Our Divine Community</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="text-center">
@@ -198,7 +253,7 @@ const AboutPage = () => {
           <p className="text-center text-gray-700 dark:text-gray-300">
             We are blessed to serve a diverse community of spiritual seekers from all traditions and backgrounds.
           </p>
-        </div>
+        </div> */}
 
         {/* Final Message */}
         <div className="text-center mb-12">
