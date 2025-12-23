@@ -9,7 +9,8 @@ import {
   FaFilePdf, FaDownload, FaHome, FaHeart,
   FaUserCircle, FaSignOutAlt, FaBell,
   FaFilter, FaSearch, FaTimes, FaCalendarDay,
-  FaUser, FaBook, FaQuoteLeft, FaStar
+  FaUser, FaBook, FaQuoteLeft, FaStar,
+  FaTable, FaThLarge, FaChevronDown, FaChevronUp
 } from "react-icons/fa";
 import PdfGenerator from "@/components/PdfGenerator";
 
@@ -18,8 +19,9 @@ const PlaceList = () => {
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [expandedMembers, setExpandedMembers] = useState({});
+  const [expandedDetails, setExpandedDetails] = useState({});
   const [showFilters, setShowFilters] = useState(false);
+  const [viewMode, setViewMode] = useState("table"); // "table" or "card"
 
   // Filter states
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,7 +40,6 @@ const PlaceList = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const visits = res.data?.visits ?? [];
-        console.log("Fetched places:", visits); // Debug log
         setPlaces(visits);
         setFilteredPlaces(visits);
       } catch (err) {
@@ -147,8 +148,8 @@ const PlaceList = () => {
     }
   };
 
-  const toggleMembers = (id) => {
-    setExpandedMembers((prev) => ({
+  const toggleDetails = (id) => {
+    setExpandedDetails((prev) => ({
       ...prev,
       [id]: !prev[id],
     }));
@@ -227,7 +228,6 @@ const PlaceList = () => {
       <div className="z-20 bg-linear-to-r from-amber-400/10 via-orange-400/10 to-amber-400/10 dark:from-amber-700/10 dark:via-orange-700/10 dark:to-amber-700/10 backdrop-blur-lg rounded-3xl p-4 mb-6 -mx-2 shadow-lg border border-white/30 dark:border-gray-700/30">
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-
           <div className="flex items-center gap-3">
             <div className="p-2.5 bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-800 dark:to-orange-800 rounded-xl shadow">
               <FaPray className="text-amber-700 dark:text-amber-300 text-xl" />
@@ -270,6 +270,30 @@ const PlaceList = () => {
           </div>
 
           <div className="hidden sm:flex items-center gap-2 w-full sm:w-auto">
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-2 bg-white/50 dark:bg-gray-800/50 p-1 rounded-xl">
+              <button
+                onClick={() => setViewMode("table")}
+                className={`p-2 rounded-lg transition-all duration-300 ${viewMode === "table"
+                    ? "bg-amber-500 text-white shadow"
+                    : "text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30"
+                  }`}
+                title="Table View"
+              >
+                <FaTable />
+              </button>
+              <button
+                onClick={() => setViewMode("card")}
+                className={`p-2 rounded-lg transition-all duration-300 ${viewMode === "card"
+                    ? "bg-amber-500 text-white shadow"
+                    : "text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30"
+                  }`}
+                title="Card View"
+              >
+                <FaThLarge />
+              </button>
+            </div>
+
             <PdfGenerator
               data={pdfData}
               fileName={`Spiritual_visits_${new Date().toISOString().split('T')[0]}.pdf`}
@@ -283,10 +307,25 @@ const PlaceList = () => {
               <span>Add Visit</span>
             </button>
           </div>
-
         </div>
 
         <div className="sm:hidden flex items-center gap-2 w-full sm:w-auto mt-4">
+          {/* View Mode Toggle for Mobile */}
+          <div className="flex items-center gap-2 bg-white/50 dark:bg-gray-800/50 p-1 rounded-xl">
+            <button
+              onClick={() => setViewMode("table")}
+              className={`p-2 rounded-lg ${viewMode === "table" ? "bg-amber-500 text-white" : "text-gray-600 dark:text-gray-400"}`}
+            >
+              <FaTable size={14} />
+            </button>
+            <button
+              onClick={() => setViewMode("card")}
+              className={`p-2 rounded-lg ${viewMode === "card" ? "bg-amber-500 text-white" : "text-gray-600 dark:text-gray-400"}`}
+            >
+              <FaThLarge size={14} />
+            </button>
+          </div>
+
           <PdfGenerator
             data={pdfData}
             fileName={`Spiritual_visits_${new Date().toISOString().split('T')[0]}.pdf`}
@@ -367,8 +406,8 @@ const PlaceList = () => {
                     <button
                       onClick={() => setVisitTypeFilter("all")}
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ${visitTypeFilter === "all"
-                        ? "bg-linear-to-r from-amber-500 to-orange-500 text-white shadow"
-                        : "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-800/40"
+                          ? "bg-linear-to-r from-amber-500 to-orange-500 text-white shadow"
+                          : "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-800/40"
                         }`}
                     >
                       All
@@ -378,8 +417,8 @@ const PlaceList = () => {
                         key={type}
                         onClick={() => setVisitTypeFilter(type)}
                         className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 capitalize ${visitTypeFilter === type
-                          ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow"
-                          : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40"
+                            ? "bg-linear-to-r from-blue-500 to-cyan-500 text-white shadow"
+                            : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800/40"
                           }`}
                       >
                         {type}
@@ -421,7 +460,6 @@ const PlaceList = () => {
                     <option value="oldest">Oldest First</option>
                     <option value="name-asc">Name (A-Z)</option>
                     <option value="name-desc">Name (Z-A)</option>
-                    <option value="mantra">By Mantra</option>
                   </select>
                 </div>
 
@@ -450,12 +488,10 @@ const PlaceList = () => {
             </div>
           )}
         </div>
-
-
       </div>
 
       {/* Main Content */}
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {filteredPlaces.length === 0 ? (
           <div className="bg-linear-to-br from-white to-amber-50 dark:from-gray-800 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 text-center shadow-2xl border border-amber-100 dark:border-gray-700">
             <div className="text-7xl mb-6">🙏</div>
@@ -484,176 +520,382 @@ const PlaceList = () => {
             </button>
           </div>
         ) : (
-          <div className="space-y-6">
-            {filteredPlaces.map((item) => (
-              <div
-                key={item._id}
-                className="bg-linear-to-br from-white to-amber-50 dark:from-gray-800 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-amber-100 dark:border-gray-700 overflow-hidden hover:shadow-3xl transition-all duration-500"
-              >
-                {/* Card Header */}
-                <div className="p-5 border-b border-amber-100 dark:border-gray-700">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className="p-3 bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl shadow">
-                        <FaMapMarkerAlt className="text-amber-700 dark:text-amber-300 text-2xl" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-1 line-clamp-1">
-                          {item.place || "Unnamed Place"}
-                        </h2>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className={`text-xs px-3 py-1 rounded-full font-medium ${item.visitType === "family"
-                            ? "bg-linear-to-r from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 text-blue-700 dark:text-blue-300"
-                            : "bg-linear-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 text-purple-700 dark:text-purple-300"
-                            }`}>
-                            {item.visitType || "individual"}
-                          </span>
-                          <span className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1">
-                            <FaCalendarAlt size={10} />
-                            {item.date ? new Date(item.date).toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              year: 'numeric'
-                            }) : "No date"}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-5">
-                  {/* Visit Info Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                    {/* Name Section */}
-                    <div className="p-4 bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl border border-blue-200 dark:border-blue-800/30">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FaUser className="text-blue-600 dark:text-blue-400 text-sm" />
-                        <span className="text-sm font-semibold text-blue-700 dark:text-blue-400">Your Name</span>
-                      </div>
-                      <p className="text-gray-700 dark:text-gray-300 pl-4">
-                        {user?.name || "Divine Seeker"}
-                      </p>
-                    </div>
-
-                    {/* Mantra Section */}
-                    <div className="p-4 bg-linear-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-200 dark:border-purple-800/30">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FaBook className="text-purple-600 dark:text-purple-400 text-sm" />
-                        <span className="text-sm font-semibold text-purple-700 dark:text-purple-400">Spiritual Mantra</span>
-                      </div>
-                      <p className="text-gray-700 dark:text-gray-300 pl-4">
-                        {item.mantras ? (
-                          <span className="inline-flex items-center gap-1">
-                            {item.mantras}
-                            {item.mantras.includes("Nam") && "🙏"}
-                            {item.mantras.includes("Satnam") && "🌟"}
-                            {item.mantras.includes("Om") && "🕉️"}
-                          </span>
-                        ) : (
-                          <span className="text-gray-500 dark:text-gray-400 italic">Not specified</span>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Purpose Section */}
-                  <div className="mb-5 p-4 bg-linear-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800/30">
-                    <div className="flex items-center gap-2 mb-2">
-                      <FaStar className="text-amber-600 dark:text-amber-400 text-sm" />
-                      <span className="text-sm font-semibold text-amber-700 dark:text-amber-400">Spiritual Purpose</span>
-                    </div>
-                    <p className="text-gray-700 dark:text-gray-300 pl-4">
-                      {item.customPurpose || item.purpose || "Not specified"}
-                    </p>
-                  </div>
-
-                  {/* Family Members Section */}
-                  {item.visitType === "family" && item.familyMembers?.length > 0 && (
-                    <div className="mb-5">
-                      <button
-                        onClick={() => toggleMembers(item._id)}
-                        className="w-full flex items-center justify-between p-3 rounded-xl bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:shadow-md transition-all duration-300"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 bg-white/50 dark:bg-gray-800/50 rounded-lg">
-                            <FaUsers className="text-blue-600 dark:text-blue-400" />
+          <>
+            {/* TABLE VIEW */}
+            {viewMode === "table" ? (
+              <div className="bg-linear-to-br from-white to-amber-50 dark:from-gray-800 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-amber-100 dark:border-gray-700 overflow-hidden">
+                {/* Table Header */}
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="bg-linear-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-900 border-b border-amber-100 dark:border-gray-700">
+                        <th className="py-4 px-6 text-left">
+                          <div className="flex items-center gap-2">
+                            <FaMapMarkerAlt className="text-amber-600 dark:text-amber-400" />
+                            <span className="font-semibold text-gray-700 dark:text-gray-300">Place</span>
                           </div>
-                          <div className="text-left">
-                            <span className="font-medium">Family Members</span>
-                            <p className="text-xs opacity-75">{item.familyMembers.length} blessed souls</p>
+                        </th>
+                        <th className="py-4 px-6 text-left">
+                          <div className="flex items-center gap-2">
+                            <FaCalendarAlt className="text-amber-600 dark:text-amber-400" />
+                            <span className="font-semibold text-gray-700 dark:text-gray-300">Date</span>
                           </div>
-                        </div>
-                        {expandedMembers[item._id] ?
-                          <FaEyeSlash className="text-blue-600 dark:text-blue-400" /> :
-                          <FaEye className="text-blue-600 dark:text-blue-400" />
-                        }
-                      </button>
-
-                      {expandedMembers[item._id] && (
-                        <div className="mt-3 p-4 bg-linear-to-r from-blue-50/50 to-cyan-50/50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-2xl border border-blue-100 dark:border-blue-800/30">
-                          <div className="space-y-3">
-                            {item.familyMembers.map((member, index) => (
-                              <div
-                                key={member._id || index}
-                                className="bg-white/70 dark:bg-gray-800/70 rounded-xl p-4 border border-white/50 dark:border-gray-700/50"
-                              >
-                                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
-                                  <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-2">
-                                      <FaUser className="text-blue-600 dark:text-blue-400 text-sm" />
-                                      <p className="font-medium text-gray-800 dark:text-white">
-                                        {member.name || "Unnamed"}
-                                      </p>
+                        </th>
+                        <th className="py-4 px-6 text-left">
+                          <div className="flex items-center gap-2">
+                            <FaBook className="text-amber-600 dark:text-amber-400" />
+                            <span className="font-semibold text-gray-700 dark:text-gray-300">Mantra</span>
+                          </div>
+                        </th>
+                        <th className="py-4 px-6 text-left">
+                          <div className="flex items-center gap-2">
+                            <FaStar className="text-amber-600 dark:text-amber-400" />
+                            <span className="font-semibold text-gray-700 dark:text-gray-300">Type</span>
+                          </div>
+                        </th>
+                        <th className="py-4 px-6 text-left">
+                          <div className="flex items-center gap-2">
+                            <FaUsers className="text-amber-600 dark:text-amber-400" />
+                            <span className="font-semibold text-gray-700 dark:text-gray-300">Family</span>
+                          </div>
+                        </th>
+                        <th className="py-4 px-6 text-left">
+                          <span className="font-semibold text-gray-700 dark:text-gray-300">Actions</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredPlaces.map((item) => (
+                        <React.Fragment key={item._id}>
+                          <tr className="border-b border-amber-50 dark:border-gray-700 hover:bg-amber-50/50 dark:hover:bg-gray-800/50 transition-colors duration-200">
+                            <td className="py-4 px-6">
+                              <div className="flex items-center gap-3">
+                                <div className="p-2 bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-lg">
+                                  <FaMapMarkerAlt className="text-amber-700 dark:text-amber-300" />
+                                </div>
+                                <div>
+                                  <p className="font-medium text-gray-800 dark:text-white">{item.place || "Unnamed Place"}</p>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">
+                                    {item.customPurpose || item.purpose || "No purpose specified"}
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="py-4 px-6">
+                              <div className="flex items-center gap-2">
+                                <span className="text-gray-700 dark:text-gray-300">
+                                  {item.date ? new Date(item.date).toLocaleDateString('en-US', {
+                                    month: 'short',
+                                    day: 'numeric',
+                                    year: 'numeric'
+                                  }) : "No date"}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="py-4 px-6">
+                              <div className="max-w-xs">
+                                <p className="text-gray-700 dark:text-gray-300 line-clamp-2">
+                                  {item.mantras || "Not specified"}
+                                </p>
+                              </div>
+                            </td>
+                            <td className="py-4 px-6">
+                              <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${item.visitType === "family"
+                                  ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                                  : "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                                }`}>
+                                {item.visitType === "family" && <FaUsers size={12} />}
+                                {item.visitType || "individual"}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6">
+                              {item.visitType === "family" && item.familyMembers?.length > 0 ? (
+                                <div className="flex items-center gap-2">
+                                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                                    {item.familyMembers.length} members
+                                  </span>
+                                  <button
+                                    onClick={() => toggleDetails(item._id)}
+                                    className="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300"
+                                  >
+                                    {expandedDetails[item._id] ? <FaChevronUp /> : <FaChevronDown />}
+                                  </button>
+                                </div>
+                              ) : (
+                                <span className="text-sm text-gray-400 dark:text-gray-500">-</span>
+                              )}
+                            </td>
+                            <td className="py-4 px-6">
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => navigate(`/update-place/${item._id}`)}
+                                  className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800/40 transition-colors duration-200"
+                                  title="Edit"
+                                >
+                                  <FaEdit size={16} />
+                                </button>
+                                <button
+                                  onClick={() => deletePlace(item._id)}
+                                  className="p-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-800/40 transition-colors duration-200"
+                                  title="Delete"
+                                >
+                                  <FaTrash size={16} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          
+                          {/* Expanded Details Row */}
+                          {expandedDetails[item._id] && (item.visitType === "family" && item.familyMembers?.length > 0) && (
+                            <tr className="bg-amber-50/30 dark:bg-gray-800/30">
+                              <td colSpan="6" className="py-4 px-6">
+                                <div className="pl-14 pr-6">
+                                  <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                                    <FaUsers className="text-blue-600 dark:text-blue-400" />
+                                    Family Members Details
+                                  </h4>
+                                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                    {item.familyMembers.map((member, index) => (
+                                      <div
+                                        key={member._id || index}
+                                        className="bg-white/70 dark:bg-gray-800/70 rounded-xl p-4 border border-amber-100 dark:border-gray-700"
+                                      >
+                                        <div className="flex items-center gap-3 mb-2">
+                                          <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                                            <FaUser className="text-blue-600 dark:text-blue-400" />
+                                          </div>
+                                          <div>
+                                            <p className="font-medium text-gray-800 dark:text-white">{member.name || "Unnamed"}</p>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">{member.relationship || "Not specified"}</p>
+                                          </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                          {member.age && (
+                                            <div className="flex items-center gap-2 text-sm">
+                                              <span className="text-gray-600 dark:text-gray-400">Age:</span>
+                                              <span className="text-gray-800 dark:text-white">{member.age}</span>
+                                            </div>
+                                          )}
+                                          {member.mantras && (
+                                            <div className="flex items-center gap-2 text-sm">
+                                              <span className="text-gray-600 dark:text-gray-400">Mantra:</span>
+                                              <span className="text-gray-800 dark:text-white">{member.mantras}</span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          )}
+                          
+                          {/* Expanded Details for Individual Visits */}
+                          {expandedDetails[item._id] && item.visitType !== "family" && (
+                            <tr className="bg-amber-50/30 dark:bg-gray-800/30">
+                              <td colSpan="6" className="py-4 px-6">
+                                <div className="pl-14 pr-6">
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="bg-white/70 dark:bg-gray-800/70 rounded-xl p-4 border border-amber-100 dark:border-gray-700">
+                                      <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                                        <FaUser className="text-blue-600 dark:text-blue-400" />
+                                        Your Name
+                                      </h4>
+                                      <p className="text-gray-800 dark:text-white">{user?.name || "Divine Seeker"}</p>
                                     </div>
-                                    <div className="flex flex-wrap gap-2">
-                                      <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
-                                        {member.relationship || "Not specified"}
-                                      </span>
-                                      {member.age && (
-                                        <span className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-2 py-1 rounded-full">
-                                          Age: {member.age}
-                                        </span>
-                                      )}
-                                      {member.mantras && (
-                                        <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
-                                          Mantra: {member.mantras}
-                                        </span>
-                                      )}
+                                    <div className="bg-white/70 dark:bg-gray-800/70 rounded-xl p-4 border border-amber-100 dark:border-gray-700">
+                                      <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                                        <FaStar className="text-amber-600 dark:text-amber-400" />
+                                        Purpose
+                                      </h4>
+                                      <p className="text-gray-800 dark:text-white">{item.customPurpose || item.purpose || "Not specified"}</p>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
-                    <button
-                      onClick={() => navigate(`/update-place/${item._id}`)}
-                      className="flex-1 bg-linear-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
-                    >
-                      <FaEdit />
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      onClick={() => deletePlace(item._id)}
-                      className="flex-1 bg-linear-to-r from-red-500 to-red-600 dark:from-red-600 dark:to-red-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
-                    >
-                      <FaTrash />
-                      <span>Delete</span>
-                    </button>
-                  </div>
+                              </td>
+                            </tr>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
-            ))}
-          </div>
+            ) : (
+              /* CARD VIEW (Your original design) */
+              <div className="space-y-6">
+                {filteredPlaces.map((item) => (
+                  <div
+                    key={item._id}
+                    className="bg-linear-to-br from-white to-amber-50 dark:from-gray-800 dark:to-gray-900/50 backdrop-blur-sm rounded-3xl shadow-2xl border border-amber-100 dark:border-gray-700 overflow-hidden hover:shadow-3xl transition-all duration-500"
+                  >
+                    {/* Card Header */}
+                    <div className="p-5 border-b border-amber-100 dark:border-gray-700">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="p-3 bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl shadow">
+                            <FaMapMarkerAlt className="text-amber-700 dark:text-amber-300 text-2xl" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-1 line-clamp-1">
+                              {item.place || "Unnamed Place"}
+                            </h2>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className={`text-xs px-3 py-1 rounded-full font-medium ${item.visitType === "family"
+                                  ? "bg-linear-to-r from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 text-blue-700 dark:text-blue-300"
+                                  : "bg-linear-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 text-purple-700 dark:text-purple-300"
+                                }`}>
+                                {item.visitType || "individual"}
+                              </span>
+                              <span className="text-xs text-gray-600 dark:text-gray-400 flex items-center gap-1">
+                                <FaCalendarAlt size={10} />
+                                {item.date ? new Date(item.date).toLocaleDateString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric'
+                                }) : "No date"}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="p-5">
+                      {/* Visit Info Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                        {/* Name Section */}
+                        <div className="p-4 bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl border border-blue-200 dark:border-blue-800/30">
+                          <div className="flex items-center gap-2 mb-2">
+                            <FaUser className="text-blue-600 dark:text-blue-400 text-sm" />
+                            <span className="text-sm font-semibold text-blue-700 dark:text-blue-400">Your Name</span>
+                          </div>
+                          <p className="text-gray-700 dark:text-gray-300 pl-4">
+                            {user?.name || "Divine Seeker"}
+                          </p>
+                        </div>
+
+                        {/* Mantra Section */}
+                        <div className="p-4 bg-linear-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-200 dark:border-purple-800/30">
+                          <div className="flex items-center gap-2 mb-2">
+                            <FaBook className="text-purple-600 dark:text-purple-400 text-sm" />
+                            <span className="text-sm font-semibold text-purple-700 dark:text-purple-400">Spiritual Mantra</span>
+                          </div>
+                          <p className="text-gray-700 dark:text-gray-300 pl-4">
+                            {item.mantras ? (
+                              <span className="inline-flex items-center gap-1">
+                                {item.mantras}
+                                {item.mantras.includes("Nam") && "🙏"}
+                                {item.mantras.includes("Satnam") && "🌟"}
+                                {item.mantras.includes("Om") && "🕉️"}
+                              </span>
+                            ) : (
+                              <span className="text-gray-500 dark:text-gray-400 italic">Not specified</span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Purpose Section */}
+                      <div className="mb-5 p-4 bg-linear-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800/30">
+                        <div className="flex items-center gap-2 mb-2">
+                          <FaStar className="text-amber-600 dark:text-amber-400 text-sm" />
+                          <span className="text-sm font-semibold text-amber-700 dark:text-amber-400">Spiritual Purpose</span>
+                        </div>
+                        <p className="text-gray-700 dark:text-gray-300 pl-4">
+                          {item.customPurpose || item.purpose || "Not specified"}
+                        </p>
+                      </div>
+
+                      {/* Family Members Section */}
+                      {item.visitType === "family" && item.familyMembers?.length > 0 && (
+                        <div className="mb-5">
+                          <button
+                            onClick={() => toggleDetails(item._id)}
+                            className="w-full flex items-center justify-between p-3 rounded-xl bg-linear-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:shadow-md transition-all duration-300"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="p-2 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                                <FaUsers className="text-blue-600 dark:text-blue-400" />
+                              </div>
+                              <div className="text-left">
+                                <span className="font-medium">Family Members</span>
+                                <p className="text-xs opacity-75">{item.familyMembers.length} blessed souls</p>
+                              </div>
+                            </div>
+                            {expandedDetails[item._id] ?
+                              <FaChevronUp className="text-blue-600 dark:text-blue-400" /> :
+                              <FaChevronDown className="text-blue-600 dark:text-blue-400" />
+                            }
+                          </button>
+
+                          {expandedDetails[item._id] && (
+                            <div className="mt-3 p-4 bg-linear-to-r from-blue-50/50 to-cyan-50/50 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-2xl border border-blue-100 dark:border-blue-800/30">
+                              <div className="space-y-3">
+                                {item.familyMembers.map((member, index) => (
+                                  <div
+                                    key={member._id || index}
+                                    className="bg-white/70 dark:bg-gray-800/70 rounded-xl p-4 border border-white/50 dark:border-gray-700/50"
+                                  >
+                                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
+                                      <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <FaUser className="text-blue-600 dark:text-blue-400 text-sm" />
+                                          <p className="font-medium text-gray-800 dark:text-white">
+                                            {member.name || "Unnamed"}
+                                          </p>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                          <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
+                                            {member.relationship || "Not specified"}
+                                          </span>
+                                          {member.age && (
+                                            <span className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-2 py-1 rounded-full">
+                                              Age: {member.age}
+                                            </span>
+                                          )}
+                                          {member.mantras && (
+                                            <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">
+                                              Mantra: {member.mantras}
+                                            </span>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
+                        <button
+                          onClick={() => navigate(`/update-place/${item._id}`)}
+                          className="flex-1 bg-linear-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
+                        >
+                          <FaEdit />
+                          <span>Edit</span>
+                        </button>
+
+                        <button
+                          onClick={() => deletePlace(item._id)}
+                          className="flex-1 bg-linear-to-r from-red-500 to-red-600 dark:from-red-600 dark:to-red-700 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
+                        >
+                          <FaTrash />
+                          <span>Delete</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -667,7 +909,7 @@ const PlaceList = () => {
       </button>
 
       {/* Spiritual Footer */}
-      <div className="max-w-2xl mx-auto mt-10 text-center px-2">
+      <div className="max-w-6xl mx-auto mt-10 text-center px-2">
         <div className="text-3xl mb-2">🪷🙏🕊️</div>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
           May peace and blessings accompany all your spiritual journeys

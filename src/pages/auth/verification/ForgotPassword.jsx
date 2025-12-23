@@ -245,16 +245,16 @@ const ForgotPassword = () => {
                     </div>
 
                     {/* Right Side - Features */}
-                    <div className="lg:col-span-2">
-                        <div className="h-full bg-linear-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-3xl p-6 border border-amber-200 dark:border-amber-800/30">
-                            <div className="text-5xl mb-6 text-center">✨</div>
+                    {/* <div className="lg:col-span-2"> */}
+                        {/* <div className="h-full bg-linear-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-3xl p-6 border border-amber-200 dark:border-amber-800/30"> */}
+                            {/* <div className="text-5xl mb-6 text-center">✨</div>
                             <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6 text-center">
                                 Divine Security Process
-                            </h3>
+                            </h3> */}
                             
-                            <div className="space-y-4">
+                            {/* <div className="space-y-4"> */}
                                 {/* Feature 1 */}
-                                <div className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-xl">
+                                {/* <div className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-xl">
                                     <div className="p-2 bg-linear-to-br from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-lg">
                                         <FaShieldAlt className="text-blue-600 dark:text-blue-400" />
                                     </div>
@@ -264,10 +264,10 @@ const ForgotPassword = () => {
                                             Receive a blessed OTP code for authentication
                                         </p>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Feature 2 */}
-                                <div className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-xl">
+                                {/* <div className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-xl">
                                     <div className="p-2 bg-linear-to-br from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg">
                                         <FaCheckCircle className="text-green-600 dark:text-green-400" />
                                     </div>
@@ -277,10 +277,10 @@ const ForgotPassword = () => {
                                             Create a new blessed password with peace of mind
                                         </p>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Feature 3 */}
-                                <div className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-xl">
+                                {/* <div className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-xl">
                                     <div className="p-2 bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg">
                                         <FaLeaf className="text-purple-600 dark:text-purple-400" />
                                     </div>
@@ -290,11 +290,11 @@ const ForgotPassword = () => {
                                             Regain access to your Spiritual journey records
                                         </p>
                                     </div>
-                                </div>
-                            </div>
+                                </div> */}
+                            {/* </div> */}
 
                             {/* Security Note */}
-                            <div className="mt-8 p-4 bg-linear-to-r from-amber-100/50 to-orange-100/50 dark:from-amber-900/10 dark:to-orange-900/10 rounded-xl border border-amber-200 dark:border-amber-800/20">
+                            {/* <div className="mt-8 p-4 bg-linear-to-r from-amber-100/50 to-orange-100/50 dark:from-amber-900/10 dark:to-orange-900/10 rounded-xl border border-amber-200 dark:border-amber-800/20">
                                 <div className="flex items-center gap-2 mb-2">
                                     <FaPray className="text-amber-600 dark:text-amber-400" size={14} />
                                     <span className="text-sm font-medium text-gray-800 dark:text-white">Divine Protection</span>
@@ -302,17 +302,17 @@ const ForgotPassword = () => {
                                 <p className="text-xs text-gray-600 dark:text-gray-400">
                                     Your spiritual journey data remains encrypted and protected throughout this process.
                                 </p>
-                            </div>
+                            </div> */}
 
                             {/* Help Message */}
-                            <div className="mt-6 text-center">
+                            {/* <div className="mt-6 text-center">
                                 <div className="text-2xl mb-2">🙏</div>
                                 <p className="text-sm text-gray-700 dark:text-gray-300 italic">
                                     "Sat Saheb"
                                 </p>
-                            </div>
-                        </div>
-                    </div>
+                            </div> */}
+                        {/* </div> */}
+                    {/* </div> */}
                 </div>
 
                 {/* Footer Note */}

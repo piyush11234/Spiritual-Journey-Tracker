@@ -82,7 +82,7 @@ const Navbar = () => {
       closeMenu();
       navigate("/");
       setIsLoggingOut(false);
-      toast.success("🙏 Logged out successfully. May peace be with you.");
+      toast.success("🙏 Logged out successfully.");
     }
   }, [dispatch, navigate, closeMenu]);
 
